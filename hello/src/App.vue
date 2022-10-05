@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TableVue from './components/Table.vue';
+import TableVue from './components/Table/Table.vue';
 export default {
   name: 'App',
   components: {

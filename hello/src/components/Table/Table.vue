@@ -22,9 +22,11 @@ import TableBody from "./TableBody.vue";
 import TableMenu from "./TableMenu.vue";
 import TablePagination from "./TablePagination.vue";
 
-import Filter from "../mixins/Filter.vue";
-import Sort from "../mixins/Sort.vue";
-import Pagination from "../mixins/Pagination.vue";
+import Filter from "../../mixins/Filter.vue";
+import Sort from "../../mixins/Sort.vue";
+import Pagination from "../../mixins/Pagination.vue";
+
+import { getAllTableData } from "../../api/TableApi";
 
 export default {
   name: "Table",
@@ -35,10 +37,9 @@ export default {
     TablePagination,
   },
   mixins: [Filter, Sort, Pagination],
-  beforeCreate() {
-    fetch("http://127.0.0.1:5000/")
-      .then((response) => response.json())
-      .then((data) => (this.tableData = data.data.vueData));
+
+  created() {
+    this.loadTableData();
   },
 
   data: () => {
@@ -57,10 +58,17 @@ export default {
     },
   },
 
-  watch:{
-    'filter.value'(){
-        this.updatePaginayionActiveIndx(1)
-    }
-  }
+  methods: {
+    async loadTableData() {
+      const data = await getAllTableData();
+      this.tableData = data.vueData
+    },
+  },
+
+  watch: {
+    "filter.value"() {
+      this.updatePaginayionActiveIndx(1);
+    },
+  },
 };
 </script>

@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import CustomSelect from "./CustomSelect.vue";
-import CustopInput from "./CustopInput.vue";
+import CustomSelect from "../CustomSelect.vue";
+import CustopInput from "../CustopInput.vue";
 
 export default {
   name: "TableMenu",
